@@ -1,2 +1,2 @@
-# php-postgresql-tmp
+# php-postgresql-tmpl
 PHP + PostgreSQL template
