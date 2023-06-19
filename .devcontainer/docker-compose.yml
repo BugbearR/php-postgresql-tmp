@@ -1,0 +1,30 @@
+services:
+  workspace:
+    build:
+      context: ./workspace/docker
+      dockerfile: Dockerfile 
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGPASSWORD: ${DB_PASSWORD}
+    volumes:
+      - type: bind
+        source: ..
+        target: /workspace
+    tty: true
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - type: volume
+        source: postgres-data
+        target: /var/lib/postgresql/data
+      # - type: bind
+      #   source: ./db/init
+      #   target: /docker-entrypoint-initdb.d
+
+volumes:
+  postgres-data:
